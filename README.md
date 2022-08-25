@@ -6,6 +6,18 @@
 # 코드 설명
 ```jsp
 <%
+	String sql="select custno, custname, phone, address, "
+	          +"to_char(joindate,'yyyy-mm-dd') joindate, "
+			  +"case when grade = 'A' then 'VIP' when grade = 'B' then '일반' else '직원' end grade, "
+			  +"city from member_tbl_02 order by custno asc";
+
+	Connection conn = DBConnect.getConnection();
+	PreparedStatement pstmt = conn.prepareStatement(sql);
+	ResultSet rs = pstmt.executeQuery();
+%>    
+```
+```jsp
+<%
 					while(rs.next()) {
 				%>
 				<tr class="center">
